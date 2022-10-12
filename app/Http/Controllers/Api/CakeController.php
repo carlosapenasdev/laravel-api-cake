@@ -27,9 +27,17 @@ class CakeController extends Controller
         try {
             $cakes = $this->cakeService->getAll($request);
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), 500);
+            return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
         }
-        return $this->sendResponse($cakes, 'Bolos recuperados com sucesso');
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Bolos recuperados com sucesso',
+                'data'    => $cakes
+            ],
+            200
+        );
     }
 
     /**
@@ -45,9 +53,17 @@ class CakeController extends Controller
             $cake       = $this->cakeService->create($payload);
 
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), 500);
+            return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
         }
-        return $this->sendResponse($cake, 'Bolo salvo com sucesso');
+
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Bolo salvo com sucesso',
+                'data'    => $cake
+            ],
+            200
+        );
     }
 
     /**
@@ -59,9 +75,17 @@ class CakeController extends Controller
     public function show(Cake $cake): JsonResponse
     {
         try {
-            return $this->sendResponse($cake, 'Bolo recuperado com sucesso');
+
+            return response()->json(
+                [
+                    'success' => true,
+                    'message' => 'Bolo recuperado com sucesso',
+                    'data'    => $cake
+                ],
+                200
+            );
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), 500);
+            return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
         }
     }
 
@@ -78,10 +102,17 @@ class CakeController extends Controller
             $payload = $request->validated();
             $cake = $this->cakeService->update($payload, $cake->id);
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), 500);
+            return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
         }
 
-        return $this->sendResponse($cake, 'Bolo atualizado com sucesso');
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Bolo atualizado com sucesso',
+                'data'    => $cake
+            ],
+            200
+        );
     }
 
     /**
@@ -95,7 +126,7 @@ class CakeController extends Controller
         try {
             $this->cakeService->delete($cake);
         } catch (Exception $e) {
-            return $this->sendError($e->getMessage(), 500);
+            return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
         }
 
         return $this->sendSuccess('Bolo deletado com sucesso');
