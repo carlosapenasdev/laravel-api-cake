@@ -30,4 +30,11 @@ class CakeRepository
         $model->update($input);
         return $model;
     }
+
+    public function delete($id): Model
+    {
+        $model = $this->findOrFail($id);
+        $model->destroy($id);
+        return $model;
+    }
 }

@@ -30,4 +30,9 @@ class CakeService
     {
         return new CakeResource($this->repository->update($input, $id));
     }
+
+    public function delete($id): CakeResource
+    {
+        return new CakeResource($this->repository->delete($id));
+    }
 }

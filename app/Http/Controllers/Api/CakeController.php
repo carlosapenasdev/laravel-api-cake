@@ -118,18 +118,25 @@ class CakeController extends Controller
     /**
      * Remove the specified resource from storage.
      *
-     * @param  \App\Models\Cake  $cake
+     * @param  int  $cake
      * @return \Illuminate\Http\JsonResponse
      */
-    public function destroy(Cake $cake): JsonResponse
+    public function destroy($cake): JsonResponse
     {
         try {
-            $this->cakeService->delete($cake);
+            $cake = $this->cakeService->delete($cake);
         } catch (Exception $e) {
             return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
         }
 
-        return $this->sendSuccess('Bolo deletado com sucesso');
+        return response()->json(
+            [
+                'success' => true,
+                'message' => 'Bolo deletado com sucesso',
+                'data'    => $cake
+            ],
+            200
+        );
     }
 
 }
