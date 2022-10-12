@@ -21,8 +21,13 @@ class CakeService
         return new CakeResource($this->repository->create($input));
     }
 
-    public function findOrFail(int $cake): CakeResource
+    public function findOrFail(int $id): CakeResource
     {
-        return new CakeResource($this->repository->findOrFail($cake));
+        return new CakeResource($this->repository->findOrFail($id));
+    }
+
+    public function update($input, $id): CakeResource
+    {
+        return new CakeResource($this->repository->update($input, $id));
     }
 }

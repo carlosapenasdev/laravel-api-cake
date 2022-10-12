@@ -93,14 +93,14 @@ class CakeController extends Controller
      * Update the specified resource in storage.
      *
      * @param  \App\Http\Requests\UpdateCakeRequest  $request
-     * @param  \App\Models\Cake  $cake
+     * @param  int  $cake
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(UpdateCakeRequest $request, Cake $cake): JsonResponse
+    public function update(UpdateCakeRequest $request, $cake): JsonResponse
     {
         try {
             $payload = $request->validated();
-            $cake = $this->cakeService->update($payload, $cake->id);
+            $cake = $this->cakeService->update($payload, $cake);
         } catch (Exception $e) {
             return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
         }

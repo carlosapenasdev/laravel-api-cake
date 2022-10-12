@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Models\Cake;
 use Illuminate\Foundation\Http\FormRequest;
 
 class UpdateCakeRequest extends FormRequest
@@ -13,7 +14,7 @@ class UpdateCakeRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -23,8 +24,6 @@ class UpdateCakeRequest extends FormRequest
      */
     public function rules()
     {
-        return [
-            //
-        ];
+        return Cake::$rules;
     }
 }

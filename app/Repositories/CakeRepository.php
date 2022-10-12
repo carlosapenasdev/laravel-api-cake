@@ -19,8 +19,15 @@ class CakeRepository
         return $this->model->create($input);
     }
 
-    public function findOrFail(int $cake): Model
+    public function findOrFail(int $id): Model
     {
-        return $this->model->findOrFail($cake);
+        return $this->model->findOrFail($id);
+    }
+
+    public function update($input, $id): Model
+    {
+        $model = $this->findOrFail($id);
+        $model->update($input);
+        return $model;
     }
 }
