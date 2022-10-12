@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Http\Resources\CakeResource;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Http\Request;
 use App\Models\Cake;
@@ -15,8 +16,13 @@ class CakeService
     {
     }
 
-    public function create(array $input): Model
+    public function create(array $input): CakeResource
     {
-        return $this->repository->create($input);
+        return new CakeResource($this->repository->create($input));
+    }
+
+    public function findOrFail(int $cake): CakeResource
+    {
+        return new CakeResource($this->repository->findOrFail($cake));
     }
 }

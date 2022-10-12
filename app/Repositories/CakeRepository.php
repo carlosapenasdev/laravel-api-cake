@@ -18,4 +18,9 @@ class CakeRepository
     {
         return $this->model->create($input);
     }
+
+    public function findOrFail(int $cake): Model
+    {
+        return $this->model->findOrFail($cake);
+    }
 }

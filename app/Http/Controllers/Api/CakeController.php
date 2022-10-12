@@ -69,13 +69,13 @@ class CakeController extends Controller
     /**
      * Display the specified resource.
      *
-     * @param  \App\Models\Cake  $cake
+     * @param  int  $cake
      * @return \Illuminate\Http\JsonResponse
      */
-    public function show(Cake $cake): JsonResponse
+    public function show($cake): JsonResponse
     {
         try {
-
+            $cake = $this->cakeService->findOrFail($cake);
             return response()->json(
                 [
                     'success' => true,
