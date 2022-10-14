@@ -37,6 +37,6 @@ class Lead extends Model
 
     public function cakes()
     {
-        return $this->belongsToMany(Cake::class, 'cake_lead');
+        return $this->belongsToMany(Cake::class)->using(CakeLead::class);
     }
 }

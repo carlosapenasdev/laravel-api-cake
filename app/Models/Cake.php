@@ -42,6 +42,11 @@ class Cake extends Model
 
     public function leads()
     {
-        return $this->belongsToMany(Lead::class, 'cake_lead');
+        return $this->belongsToMany(Lead::class)->using(CakeLead::class);
+    }
+
+    public function isAvailable()
+    {
+        return $this->amount > 0;
     }
 }
