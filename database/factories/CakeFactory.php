@@ -17,7 +17,10 @@ class CakeFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "name"      => $this->faker->firstName(),
+            "weight"    => $this->faker->numberBetween(10, 9000),
+            "price"     => $this->faker->randomFloat(2, 1, 100),
+            "amount"    => $this->faker->numberBetween(0, 10),
         ];
     }
 }

@@ -17,7 +17,8 @@ class LeadFactory extends Factory
     public function definition()
     {
         return [
-            //
+            "name" => $this->faker->firstName(),
+            "email" => time().'_'.$this->faker->email(),
         ];
     }
 }
