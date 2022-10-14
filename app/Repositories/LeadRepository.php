@@ -27,6 +27,10 @@ class LeadRepository
         if(empty($lead)) {
             $lead = $this->model->create($input);
         }
+        elseif ($lead->trashed()) {
+            $lead->restore();
+            $lead->cakes()->detach();
+        }
 
         return $lead;
     }
@@ -52,6 +56,6 @@ class LeadRepository
 
     public function findByAtt($att, $value): ?Model
     {
-        return $this->model->where($att, $value)->first();
+        return $this->model->where($att, $value)->withTrashed()->first();
     }
 }
