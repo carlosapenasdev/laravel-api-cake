@@ -4,7 +4,6 @@ namespace App\Services;
 
 use App\Http\Resources\CakeResource;
 use App\Repositories\CakeRepository;
-use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CakeService

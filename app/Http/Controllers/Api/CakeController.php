@@ -2,8 +2,6 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Cake;
-use Illuminate\Http\Request;
 use App\Services\CakeService;
 use Exception;
 use App\Http\Controllers\Controller;
@@ -33,7 +31,7 @@ class CakeController extends Controller
         return response()->json(
             [
                 'success' => true,
-                'message' => 'Bolos recuperados com sucesso',
+                'message' => __('cake.index'),
                 'data'    => $cakes
             ],
             200
@@ -59,7 +57,7 @@ class CakeController extends Controller
         return response()->json(
             [
                 'success' => true,
-                'message' => 'Bolo salvo com sucesso',
+                'message' => __('cake.store'),
                 'data'    => $cake
             ],
             200
@@ -79,7 +77,7 @@ class CakeController extends Controller
             return response()->json(
                 [
                     'success' => true,
-                    'message' => 'Bolo recuperado com sucesso',
+                    'message' => __('cake.show'),
                     'data'    => $cake
                 ],
                 200
@@ -108,7 +106,7 @@ class CakeController extends Controller
         return response()->json(
             [
                 'success' => true,
-                'message' => 'Bolo atualizado com sucesso',
+                'message' => __('cake.update'),
                 'data'    => $cake
             ],
             200
@@ -132,7 +130,7 @@ class CakeController extends Controller
         return response()->json(
             [
                 'success' => true,
-                'message' => 'Bolo deletado com sucesso',
+                'message' =>  __('cake.destroy'),
                 'data'    => $cake
             ],
             200
