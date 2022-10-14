@@ -4,6 +4,7 @@ namespace App\Repositories;
 
 use App\Models\Cake;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Collection;
 
 class CakeRepository
 {
@@ -12,6 +13,11 @@ class CakeRepository
     public function __construct()
     {
         $this->model = app($this->model);
+    }
+
+    public function getAll(): Collection
+    {
+        return $this->model->all();
     }
 
     public function create(array $input): Model

@@ -3,17 +3,20 @@
 namespace App\Services;
 
 use App\Http\Resources\CakeResource;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Http\Request;
-use App\Models\Cake;
 use App\Repositories\CakeRepository;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Http\Resources\Json\AnonymousResourceCollection;
 
 class CakeService
 {
 
     public function __construct(private CakeRepository $repository)
     {
+    }
+
+    public function getAll(): AnonymousResourceCollection
+    {
+        return CakeResource::collection($this->repository->getAll());
     }
 
     public function create(array $input): CakeResource

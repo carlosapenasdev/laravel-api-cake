@@ -22,10 +22,10 @@ class CakeController extends Controller
      *
      * @return \Illuminate\Http\JsonResponse
      */
-    public function index(Request $request): JsonResponse
+    public function index(): JsonResponse
     {
         try {
-            $cakes = $this->cakeService->getAll($request);
+            $cakes = $this->cakeService->getAll();
         } catch (Exception $e) {
             return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
         }
