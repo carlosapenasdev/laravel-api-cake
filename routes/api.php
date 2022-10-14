@@ -1,6 +1,9 @@
 <?php
 
-use App\Http\Controllers\Api\CakeController;
+use App\Http\Controllers\Api\{
+    CakeController,
+    LeadController
+};
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -22,3 +25,4 @@ Route::get('/', function () {
 });
 
 Route::apiResource('cake', CakeController::class);
+Route::apiResource('lead', LeadController::class);
