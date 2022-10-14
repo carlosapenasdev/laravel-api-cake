@@ -6,9 +6,17 @@
 
 This is an API to testing my skills at Laravel, using Sail and Laravel 9. 
 
+## What is needed?
+- PHP 8.1
+- Composer
+
 ## How to use?
 
 ```
-git clone
-sail up -d
+git clone git@github.com:carlossantoswd/laravel-api-cake.git
+cd laravel-api-cake
+composer install
+cp .env.example .env
+./vendor/bin/sail up -d
+./vendor/bin/sail artisan migrate:refresh
 ```
