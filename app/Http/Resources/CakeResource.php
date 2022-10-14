@@ -20,6 +20,7 @@ class CakeResource extends JsonResource
             'weight'    => $this->weight,
             'price'     => $this->price,
             'amount'    => $this->amount,
+            'leads'     => LeadResource::collection($this->whenLoaded('leads')),
         ];
     }
 }

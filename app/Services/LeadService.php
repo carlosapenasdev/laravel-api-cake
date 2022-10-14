@@ -20,7 +20,11 @@ class LeadService
 
     public function create(array $input): LeadResource
     {
-        return new LeadResource($this->repository->create($input));
+        $lead = $this->repository->create($input);
+
+        $lead->cakes()->syncWithoutDetaching($input['cakes']);
+
+        return new LeadResource($lead);
     }
 
     public function findOrFail(int $id): LeadResource
@@ -30,7 +34,9 @@ class LeadService
 
     public function update($input, $id): LeadResource
     {
-        return new LeadResource($this->repository->update($input, $id));
+        $lead = $this->repository->update($input, $id);
+        $lead->cakes()->sync($input['cakes']);
+        return new LeadResource($lead);
     }
 
     public function delete($id): LeadResource

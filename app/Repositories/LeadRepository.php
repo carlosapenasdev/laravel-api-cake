@@ -17,17 +17,23 @@ class LeadRepository
 
     public function getAll(): Collection
     {
-        return $this->model->all();
+        return $this->model->with('cakes')->get();
     }
 
     public function create(array $input): Model
     {
-        return $this->model->create($input);
+        $lead = $this->findByAtt('email', $input['email']);
+
+        if(empty($lead)) {
+            $lead = $this->model->create($input);
+        }
+
+        return $lead;
     }
 
     public function findOrFail(int $id): Model
     {
-        return $this->model->findOrFail($id);
+        return $this->model->with('cakes')->findOrFail($id);
     }
 
     public function update($input, $id): Model
@@ -42,5 +48,10 @@ class LeadRepository
         $model = $this->findOrFail($id);
         $model->destroy($id);
         return $model;
+    }
+
+    public function findByAtt($att, $value): ?Model
+    {
+        return $this->model->where($att, $value)->first();
     }
 }

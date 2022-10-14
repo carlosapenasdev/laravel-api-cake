@@ -31,6 +31,12 @@ class Lead extends Model
      */
     public static array $rules = [
         'name'      => 'nullable|string|max:255',
-        'email'     => 'required|email|unique:leads,email',
+        'email'     => 'required|email',
+        'cakes.*'     => 'required|exists:App\Models\Cake,id',
     ];
+
+    public function cakes()
+    {
+        return $this->belongsToMany(Cake::class, 'cake_lead');
+    }
 }

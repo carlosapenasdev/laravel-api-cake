@@ -18,6 +18,7 @@ class LeadResource extends JsonResource
             'id'        => $this->id,
             'name'      => $this->name,
             'email'     => $this->email,
+            'cakes'     => CakeResource::collection($this->whenLoaded('cakes')),
         ];
     }
 }

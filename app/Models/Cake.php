@@ -39,4 +39,9 @@ class Cake extends Model
         'price'     => 'required|numeric',
         'amount'    => 'required|integer',
     ];
+
+    public function leads()
+    {
+        return $this->belongsToMany(Lead::class, 'cake_lead');
+    }
 }

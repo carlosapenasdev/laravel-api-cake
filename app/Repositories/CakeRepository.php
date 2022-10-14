@@ -17,7 +17,7 @@ class CakeRepository
 
     public function getAll(): Collection
     {
-        return $this->model->all();
+        return $this->model->with('leads')->get();
     }
 
     public function create(array $input): Model
