@@ -1,0 +1,370 @@
+{
+	"info": {
+		"_postman_id": "ed72a645-e79a-4d7e-b7bd-cc710cc79aa2",
+		"name": "cake",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "2066357"
+	},
+	"item": [
+		{
+			"name": "cakes",
+			"item": [
+				{
+					"name": "get all cakes",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"bolo de laranja\",\n    \"weight\": \"100\",\n    \"price\": \"100\",\n    \"amount\" : \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/cake/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"cake",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store cake",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"laranja\",\n    \"weight\": \"100\",\n    \"price\": \"100\",\n    \"amount\" : \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/cake",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"cake"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get cake",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"bolo de laranja\",\n    \"weight\": \"100\",\n    \"price\": \"100\",\n    \"amount\" : \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/cake/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"cake",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update cake",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"laranja bahia\",\n    \"weight\": \"100\",\n    \"price\": \"100\",\n    \"amount\" : \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/cake/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"cake",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete cake",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"bolo 3 update\",\n    \"weight\": \"100\",\n    \"price\": \"100\",\n    \"amount\" : \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/cake/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"cake",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "leads",
+			"item": [
+				{
+					"name": "get all leads",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"bolo de laranja\",\n    \"weight\": \"100\",\n    \"price\": \"100\",\n    \"amount\" : \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/lead/",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"lead",
+								""
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "store lead",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Carlos Santos\",\n    \"email\": \"mail@gmail.com\",\n    \"cakes\": [\"2\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/lead",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"lead"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "get lead",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"bolo de laranja\",\n    \"weight\": \"100\",\n    \"price\": \"100\",\n    \"amount\" : \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/lead/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"lead",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "update lead",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"carlos santos\",\n    \"email\": \"mail@gmail.com\",\n    \"cakes\": [\"2\"]\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/lead/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"lead",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "delete lead",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"bolo 3 update\",\n    \"weight\": \"100\",\n    \"price\": \"100\",\n    \"amount\" : \"2\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "http://localhost/lead/1",
+							"protocol": "http",
+							"host": [
+								"localhost"
+							],
+							"path": [
+								"lead",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
