@@ -2,6 +2,7 @@
 
 namespace App\Observers;
 
+use App\Jobs\CakeAvailableJob;
 use App\Models\CakeLead;
 
 class CakeLeadObserver
@@ -15,7 +16,7 @@ class CakeLeadObserver
     public function created(CakeLead $cakeLead)
     {
         if($cakeLead->cake->isAvailable()) {
-            dd('email');
+            CakeAvailableJob::dispatch($cakeLead);
         }
     }
 
