@@ -15,7 +15,8 @@ class CakeLeadObserver
      */
     public function created(CakeLead $cakeLead)
     {
-        if($cakeLead->cake->isAvailable()) {
+        $cake = $cakeLead->cake;
+        if(!is_null($cake) && $cake->isAvailable()) {
             CakeAvailableJob::dispatch($cakeLead);
         }
     }
