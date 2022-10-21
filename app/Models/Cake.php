@@ -28,18 +28,6 @@ class Cake extends Model
         'amount'    => 'integer',
     ];
 
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static array $rules = [
-        'name'      => 'required|string|max:50',
-        'weight'    => 'required|numeric',
-        'price'     => 'required|numeric',
-        'amount'    => 'required|integer',
-    ];
-
     public function leads()
     {
         return $this->belongsToMany(Lead::class)->using(CakeLead::class);

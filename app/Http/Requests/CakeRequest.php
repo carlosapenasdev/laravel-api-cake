@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Cake;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateCakeRequest extends FormRequest
+class CakeRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,11 @@ class UpdateCakeRequest extends FormRequest
      */
     public function rules()
     {
-        return Cake::$rules;
+        return [
+            'name'      => 'required|string|max:50',
+            'weight'    => 'required|numeric',
+            'price'     => 'required|numeric',
+            'amount'    => 'required|integer',
+        ];
     }
 }
