@@ -5,7 +5,7 @@ namespace App\Http\Requests;
 use App\Models\Lead;
 use Illuminate\Foundation\Http\FormRequest;
 
-class UpdateLeadRequest extends FormRequest
+class LeadRequest extends FormRequest
 {
     /**
      * Determine if the user is authorized to make this request.
@@ -24,6 +24,10 @@ class UpdateLeadRequest extends FormRequest
      */
     public function rules()
     {
-        return Lead::$rules;
+        return [
+            'name'      => 'nullable|string|max:255',
+            'email'     => 'required|email',
+            'cakes.*'   => 'required|exists:App\Models\Cake,id',
+        ];
     }
 }

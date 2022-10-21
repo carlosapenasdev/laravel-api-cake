@@ -3,7 +3,9 @@
 namespace App\Providers;
 
 use App\Models\CakeLead;
+use App\Models\Lead;
 use App\Observers\CakeLeadObserver;
+use App\Observers\LeadObserver;
 use Illuminate\Auth\Events\Registered;
 use Illuminate\Auth\Listeners\SendEmailVerificationNotification;
 use Illuminate\Foundation\Support\Providers\EventServiceProvider as ServiceProvider;
@@ -19,6 +21,7 @@ class EventServiceProvider extends ServiceProvider
      */
     protected $observers = [
         CakeLead::class => [CakeLeadObserver::class],
+        Lead::class     => [LeadObserver::class],
     ];
 
     /**

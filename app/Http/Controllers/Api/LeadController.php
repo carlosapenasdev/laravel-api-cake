@@ -2,141 +2,108 @@
 
 namespace App\Http\Controllers\Api;
 
-use App\Models\Lead;
-use Illuminate\Http\Request;
-use App\Services\LeadService;
-use Exception;
 use App\Http\Controllers\Controller;
-use App\Http\Requests\StoreLeadRequest;
-use App\Http\Requests\UpdateLeadRequest;
-use Illuminate\Http\JsonResponse;
+use App\Http\Requests\LeadRequest;
+use App\Http\Resources\LeadCollection;
+use App\Http\Resources\LeadResource;
+use App\Models\Lead;
 
 class LeadController extends Controller
 {
-    public function __construct(private LeadService $leadService)
-    {
-    }
-
     /**
      * Display a listing of the resource.
      *
-     * @return \Illuminate\Http\JsonResponse
+     * @return App\Http\Resources\LeadCollection
      */
-    public function index(): JsonResponse
+    public function index(): LeadCollection
     {
-        try {
-            $leads = $this->leadService->getAll();
-        } catch (Exception $e) {
-            return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
-        }
+        $leads = Lead::with('cakes')->get();
 
-        return response()->json(
-            [
-                'success' => true,
-                'message' => __('lead.index'),
-                'data'    => $leads
-            ],
-            200
-        );
+        return LeadCollection::make($leads)
+        ->additional([
+            'success' => true,
+            'message' => __('lead.index')
+        ]);
     }
 
     /**
      * Store a newly created resource in storage.
      *
-     * @param  \App\Http\Requests\StoreLeadRequest  $request
-     * @return \Illuminate\Http\JsonResponse
+     * @param  \App\Http\Requests\LeadRequest  $request
+     * @return App\Http\Resources\LeadResource
      */
-    public function store(StoreLeadRequest $request): JsonResponse
+    public function store(LeadRequest $request): LeadResource
     {
-        try {
-            $payload    = $request->validated();
-            $lead       = $this->leadService->create($payload);
+        $payload        = $request->validated();
 
-        } catch (Exception $e) {
-            return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
+        $lead           = Lead::whereEmail($payload['email'])->withTrashed()->first();
+
+        if(empty($lead)) {
+            $lead       = Lead::create($payload);
+        }
+        elseif ($lead->trashed()) {
+            $lead->restore();
         }
 
-        return response()->json(
-            [
-                'success' => true,
-                'message' => __('lead.store'),
-                'data'    => $lead
-            ],
-            200
-        );
+        $lead->cakes()->syncWithoutDetaching($payload['cakes']);
+
+        return LeadResource::make($lead)
+        ->additional([
+            'success' => true,
+            'message' => __('lead.store')
+        ]);
     }
 
     /**
      * Display the specified resource.
      *
-     * @param  int  $lead
-     * @return \Illuminate\Http\JsonResponse
+     * @param  App\Models\Lead $lead
+     * @return App\Http\Resources\LeadResource
      */
-    public function show($lead): JsonResponse
+    public function show(Lead $lead)
     {
-        try {
-            $lead = $this->leadService->findOrFail($lead);
-            return response()->json(
-                [
-                    'success' => true,
-                    'message' => __('lead.show'),
-                    'data'    => $lead
-                ],
-                200
-            );
-        } catch (Exception $e) {
-            return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
-        }
+        return LeadResource::make($lead->load('cakes'))
+        ->additional([
+            'success' => true,
+            'message' => __('lead.store')
+        ]);
     }
 
     /**
      * Update the specified resource in storage.
      *
-     * @param  \App\Http\Requests\UpdateLeadRequest  $request
-     * @param  int  $lead
-     * @return \Illuminate\Http\JsonResponse
+     * @param  \App\Http\Requests\LeadRequest  $request
+     * @param  App\Models\Lead $lead
+     * @return App\Http\Resources\LeadResource
      */
-    public function update(UpdateLeadRequest $request, $lead): JsonResponse
+    public function update(LeadRequest $request, Lead $lead): LeadResource
     {
-        try {
-            $payload = $request->validated();
-            $lead = $this->leadService->update($payload, $lead);
-        } catch (Exception $e) {
-            return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
-        }
+        $payload = $request->validated();
+        $lead->update($payload);
 
-        return response()->json(
-            [
-                'success' => true,
-                'message' => __('lead.update'),
-                'data'    => $lead
-            ],
-            200
-        );
+        $lead->cakes()->sync($payload['cakes']);
+
+        return LeadResource::make($lead->load('cakes'))
+        ->additional([
+            'success' => true,
+            'message' => __('lead.update')
+        ]);
     }
 
     /**
      * Remove the specified resource from storage.
      *
-     * @param  int  $lead
-     * @return \Illuminate\Http\JsonResponse
+     * @param  App\Models\Lead $lead
+     * @return App\Http\Resources\LeadResource
      */
-    public function destroy($lead): JsonResponse
+    public function destroy(Lead $lead): LeadResource
     {
-        try {
-            $lead = $this->leadService->delete($lead);
-        } catch (Exception $e) {
-            return response()->json([ 'success' => false, 'message' => $e->getMessage()], 500);
-        }
-
-        return response()->json(
-            [
-                'success' => true,
-                'message' =>  __('lead.destroy'),
-                'data'    => $lead
-            ],
-            200
-        );
+        $lead->delete();
+        return LeadResource::make($lead)
+        ->additional([
+            'success' => true,
+            'message' => __('lead.destroy')
+        ]);
     }
 
 }

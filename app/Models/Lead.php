@@ -24,17 +24,6 @@ class Lead extends Model
         'email'     => 'string',
     ];
 
-    /**
-     * Validation rules
-     *
-     * @var array
-     */
-    public static array $rules = [
-        'name'      => 'nullable|string|max:255',
-        'email'     => 'required|email',
-        'cakes.*'   => 'required|exists:App\Models\Cake,id',
-    ];
-
     public function cakes()
     {
         return $this->belongsToMany(Cake::class)->using(CakeLead::class);
