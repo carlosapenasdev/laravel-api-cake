@@ -2,82 +2,82 @@
 
 namespace Tests\Feature;
 
-use App\Models\Cake;
-use Database\Seeders\CakeSeeder;
+use App\Models\Lead;
+use Database\Seeders\LeadSeeder;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Foundation\Testing\WithFaker;
 use Tests\TestCase;
 
-class CakeTest extends TestCase
+class LeadTest extends TestCase
 {
     use RefreshDatabase, WithFaker;
 
-    public function test_create_cake()
+    public function test_create_lead()
     {
-        $cake = Cake::factory()->make()->toArray();
+        $lead           = Lead::factory()->make()->toArray();
 
         $response = $this->postJson(
-            'cake',
-            $cake
+            'lead',
+            $lead
         );
 
         $response->assertDontSee('errors')->assertStatus(201)
             ->assertJson(['success' => true]);
     }
 
-    public function test_read_cake()
+    public function test_read_lead()
     {
-        $cake = Cake::factory()->make();
+        $lead = Lead::factory()->make();
 
         $this->postJson(
-            'cake',
-            $cake->toArray()
+            'lead',
+            $lead->toArray()
         );
 
         $response = $this->getJson(
-            '/cake/'.$cake->id,
+            '/lead/'.$lead->id,
         );
 
         $response->assertDontSee('errors')->assertStatus(200)
             ->assertJson(['success' => true]);
     }
 
-    public function test_update_cake()
+    public function test_update_lead()
     {
-        $cake = Cake::factory()->make();
+        $lead = Lead::factory()->make();
 
-        $editedCake = Cake::factory()->make()->toArray();
+        $editedLead = Lead::factory()->make()->toArray();
 
         $responsePost = $this->postJson(
-            'cake',
-            $cake->toArray(),
+            'lead',
+            $lead->toArray(),
 
         );
 
-        $cake = $responsePost['data'];
+        $lead = $responsePost['data'];
 
         $response = $this->putJson(
-            '/cake/'.$cake['id'],
-            $editedCake
+            '/lead/'.$lead['id'],
+            $editedLead
         );
 
         $response->assertDontSee('errors')->assertStatus(200)
             ->assertJson(['success' => true]);
     }
 
-    public function test_delete_cake()
+    public function test_delete_lead()
     {
-        $cake = Cake::factory()->make();
+        $lead = Lead::factory()->make();
 
         $responsePost = $this->postJson(
-            'cake',
-            $cake->toArray()
+            'lead',
+            $lead->toArray()
         );
 
-        $cake = $responsePost['data'];
+        $lead = $responsePost['data'];
 
         $response = $this->deleteJson(
-            '/cake/'.$cake['id'],
+            '/lead/'.$lead['id'],
             [],
         );
 
@@ -85,36 +85,37 @@ class CakeTest extends TestCase
             ->assertJson(['success' => true]);
     }
 
-    public function test_list_cake()
+    public function test_list_lead()
     {
-        $cakes = Cake::factory(2)->create();
+        $leads = Lead::factory(2)->create();
 
         $response = $this->get(
-            'cake'
+            'lead'
         );
 
         $response->assertDontSee('errors')->assertStatus(200)
             ->assertJson(['success' => true]);
     }
 
-    public function test_cake_has_lead()
+    public function test_lead_has_cake()
     {
-        $this->seed(CakeSeeder::class);
+        $this->seed(LeadSeeder::class);
 
         $response = $this->get(
-            'cake'
+            'lead'
         );
-        $this->assertGreaterThanOrEqual(1, $response->getOriginalContent()->first()->leads->count());
+
+        $this->assertGreaterThanOrEqual(1, $response->getOriginalContent()->first()->cakes->count());
     }
 
-    public function test_cake_validation()
+    public function test_lead_validation()
     {
-        $cake = Cake::factory()->make()->toArray();
-        $cake['name'] = implode(' ', $this->faker->words(100));
+        $lead = Lead::factory()->make()->toArray();
+        $lead['name'] = implode(' ', $this->faker->words(300));
 
         $response = $this->postJson(
-            'cake',
-            $cake
+            'lead',
+            $lead
         );
 
         $response

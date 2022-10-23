@@ -45,7 +45,9 @@ class LeadController extends Controller
             $lead->restore();
         }
 
-        $lead->cakes()->syncWithoutDetaching($payload['cakes']);
+        if(isset($payload['cakes'])) {
+            $lead->cakes()->syncWithoutDetaching($payload['cakes']);
+        }
 
         return LeadResource::make($lead)
         ->additional([
@@ -81,7 +83,9 @@ class LeadController extends Controller
         $payload = $request->validated();
         $lead->update($payload);
 
-        $lead->cakes()->sync($payload['cakes']);
+        if(isset($payload['cakes'])) {
+            $lead->cakes()->sync($payload['cakes']);
+        }
 
         return LeadResource::make($lead->load('cakes'))
         ->additional([
