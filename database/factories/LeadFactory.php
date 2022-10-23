@@ -18,7 +18,7 @@ class LeadFactory extends Factory
     {
         return [
             "name" => $this->faker->firstName(),
-            "email" => time().'_'.$this->faker->email(),
+            "email" => $this->faker->unique()->email(),
         ];
     }
 }
